@@ -1,0 +1,38 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# Astro
+.astro/
+
+# environment variables (CONTIENE EL PAT DE GITHUB — NUNCA SUBIR)
+.env
+.env.local
+.env.*.local
+.env.production
+
+# opencode / prometheus artifacts
+.omo/
+.opencode/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# logs
+*.log
+npm-debug.log*
+
+# misc
+.cache/
+.tmp/

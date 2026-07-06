@@ -1,0 +1,99 @@
+---
+import siteConfig from '../config/site.json';
+import techStackConfig from '../config/tech-stack.json';
+import type { TechStackItem } from '../types';
+
+const { categories, items } = techStackConfig;
+const { order, labels }: { order: string[]; labels: Record<string, string> } = categories;
+
+// Group items by category in defined order
+const grouped = order
+  .map(cat => ({
+    category: cat,
+    label: labels[cat],
+    items: items.filter((item: TechStackItem) => item.category === cat)
+  }))
+  .filter(group => group.items.length > 0);
+---
+
+<section id="tech-stack">
+  <h2 class="section-title mono">{siteConfig.techStackTitle}</h2>
+  {grouped.map(group => (
+    <div class="category-group">
+      <h3 class="category-label mono">{group.label}</h3>
+      <div class="tech-grid">
+        {group.items.map(item => (
+          <div class="tech-item glass-card" style={`--item-color: ${item.color || 'var(--accent-cyan)'}`}>
+            <img
+              src={`https://cdn.simpleicons.org/${item.icon}/${item.color?.replace('#', '') || '00f0ff'}`}
+              alt={item.name}
+              width="32"
+              height="32"
+              loading="lazy"
+            />
+            <span class="tech-name">{item.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</section>
+
+<style>
+  #tech-stack {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    color: var(--accent-cyan);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .category-group {
+    margin-bottom: 2.5rem;
+  }
+
+  .category-label {
+    color: var(--accent-cyan);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+    border-left: 3px solid var(--accent-cyan);
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+  }
+
+  .tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 0.5rem;
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .tech-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--item-color, var(--accent-cyan));
+    border-color: var(--item-color, var(--accent-cyan));
+  }
+
+  .tech-name {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    text-align: center;
+  }
+</style>

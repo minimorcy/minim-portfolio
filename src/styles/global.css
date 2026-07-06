@@ -1,0 +1,106 @@
+/* ============================================
+   Design System: "Dark Tech with AI Soul"
+   Dark mode, mono accents, glow cyan/violet, glassmorphism
+   ============================================ */
+
+/* --- Font Imports --- */
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/700.css";
+
+/* --- CSS Custom Properties --- */
+:root {
+  /* Base */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121f;
+  --bg-card: rgba(20, 20, 35, 0.6);
+
+  /* Accents */
+  --accent-cyan: #00f0ff;
+  --accent-violet: #b026ff;
+  --accent-dim: rgba(0, 240, 255, 0.1);
+
+  /* Text */
+  --text-primary: #e0e0e8;
+  --text-secondary: #8888a0;
+  --text-muted: #50505a;
+
+  /* Border */
+  --border-glow: rgba(0, 240, 255, 0.2);
+
+  /* Responsive Breakpoints */
+  --bp-mobile: 375px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1024px;
+}
+
+/* --- Base Reset --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Utility Classes --- */
+
+/* Glassmorphism Card */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glow);
+  border-radius: 12px;
+}
+
+/* Glow Text */
+.glow-text {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 10px var(--accent-cyan), 0 0 20px var(--accent-cyan);
+}
+
+/* Monospace Font */
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* --- Glitch Animation --- */
+@keyframes glitch {
+  0%, 100% { transform: translate(0); text-shadow: none; }
+  20% { transform: translate(-2px, 2px); text-shadow: 2px 0 var(--accent-cyan), -2px 0 var(--accent-violet); }
+  40% { transform: translate(2px, -2px); text-shadow: -2px 0 var(--accent-cyan), 2px 0 var(--accent-violet); }
+  60% { transform: translate(-1px, 1px); text-shadow: 1px 0 var(--accent-violet); }
+  80% { transform: translate(1px, -1px); text-shadow: -1px 0 var(--accent-cyan); }
+}
+
+.glitch-text {
+  animation: glitch 3s infinite;
+}
+
+/* --- Accessibility: Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .glitch-text {
+    animation: none;
+  }
+}

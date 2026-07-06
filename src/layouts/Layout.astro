@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+import siteConfig from '../config/site.json';
+
+interface Props {
+  pageTitle?: string;
+  description?: string;
+}
+
+const { pageTitle, description } = Astro.props;
+const title = pageTitle || siteConfig.homeTitle;
+const desc = description || siteConfig.bio;
+---
+
+<!doctype html>
+<html lang={siteConfig.siteLanguage}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={desc} />
+
+    <title>{title}</title>
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteConfig.siteUrl} />
+    <meta property="og:image" content={siteConfig.ogImageUrl} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={desc} />
+    <meta name="twitter:image" content={siteConfig.ogImageUrl} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={siteConfig.siteUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href={siteConfig.faviconPath} />
+
+    <!-- JSON-LD Person Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": siteConfig.nickname,
+      "url": siteConfig.siteUrl,
+      "jobTitle": siteConfig.tagline,
+      "sameAs": [
+        siteConfig.githubUrl,
+        siteConfig.linkedinUrl
+      ]
+    })} />
+
+    <!-- Font Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body class="dark">
+    <div class="container">
+      <slot />
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding: 4rem;
+    }
+  }
+</style>

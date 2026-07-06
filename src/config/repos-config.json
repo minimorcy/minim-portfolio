@@ -1,0 +1,10 @@
+{
+  "exclude": ["personal-portfolio", "minimorcy", "public-apis"],
+  "featured": ["GitNexus", "ai-agents-for-beginners", "hacker-scripts"],
+  "maxDisplay": 8,
+  "overrides": {
+    "GitNexus": { "description": "Zero-Server Code Intelligence Engine", "displayOrder": 1 },
+    "ai-agents-for-beginners": { "description": "11 Lessons to Get Started Building AI Agents", "displayOrder": 2 },
+    "hacker-scripts": { "description": "Based on a true story — automation scripts and tools", "displayOrder": 3 }
+  }
+}

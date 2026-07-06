@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TechStack from '../components/TechStack.astro';
+import GitHubRepos from '../components/GitHubRepos.astro';
+import Footer from '../components/Footer.astro';
+import siteConfig from '../config/site.json';
+
+const pageTitle = siteConfig.homeTitle;
+const description = siteConfig.bio;
+---
+
+<Layout pageTitle={pageTitle} description={description}>
+  <a href="#main" class="skip-link">{siteConfig.skipToContentText}</a>
+  <main id="main">
+    <Hero />
+    <TechStack />
+    <GitHubRepos server:defer />
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-cyan);
+    color: var(--bg-primary);
+    padding: 0.5rem 1rem;
+    z-index: 100;
+    transition: top 0.2s ease;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+</style>
