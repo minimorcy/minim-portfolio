@@ -1,0 +1,169 @@
+{
+  "groups": [
+    {
+      "key": "daily",
+      "label": "Diario",
+      "open": true,
+      "items": [
+        {
+          "name": "JavaScript",
+          "note": "Core language for frontend and backend development",
+          "icon": "javascript",
+          "color": "#F7DF1E"
+        },
+        {
+          "name": "TypeScript",
+          "note": "Type-safe JavaScript used in all production code",
+          "icon": "typescript",
+          "color": "#3178C6"
+        },
+        {
+          "name": "React",
+          "note": "Primary UI library for interactive components and SPAs",
+          "icon": "react",
+          "color": "#61DAFB"
+        },
+        {
+          "name": "Astro",
+          "note": "Main framework for this portfolio and content-driven sites",
+          "icon": "astro",
+          "color": "#BC52EE"
+        },
+        {
+          "name": "Tailwind CSS",
+          "note": "Utility-first CSS framework for rapid responsive UI development",
+          "icon": "tailwindcss",
+          "color": "#06B6D4"
+        },
+        {
+          "name": "Node.js",
+          "note": "JavaScript runtime for backend APIs and tooling scripts",
+          "icon": "nodedotjs",
+          "color": "#5FA04E"
+        },
+        {
+          "name": "Git",
+          "note": "Version control for all personal and professional projects",
+          "icon": "git",
+          "color": "#F05032"
+        },
+        {
+          "name": "Docker",
+          "note": "Containerized development environments and deployment pipelines",
+          "icon": "docker",
+          "color": "#2496ED"
+        },
+        {
+          "name": "VS Code",
+          "note": "Primary code editor for daily development across languages"
+        },
+        {
+          "name": "Figma",
+          "note": "Design collaboration tool for UI/UX mockups and prototyping",
+          "icon": "figma",
+          "color": "#F24E1E"
+        }
+      ]
+    },
+    {
+      "key": "project",
+      "label": "Proyectos puntuales",
+      "open": false,
+      "items": [
+        {
+          "name": "Python",
+          "note": "ML/AI experiments and data processing pipelines",
+          "icon": "python",
+          "color": "#3776AB"
+        },
+        {
+          "name": "Svelte",
+          "note": "Experimental side-projects with reactive UI framework",
+          "icon": "svelte",
+          "color": "#FF3E00"
+        },
+        {
+          "name": "OpenAI API",
+          "note": "GPT integration and LLM-powered features in side projects"
+        },
+        {
+          "name": "Next.js",
+          "note": "Full-stack React framework for select client projects",
+          "icon": "nextdotjs",
+          "color": "#000000"
+        },
+        {
+          "name": "PostgreSQL",
+          "note": "Relational database for personal project backends",
+          "icon": "postgresql",
+          "color": "#4169E1"
+        },
+        {
+          "name": "Redis",
+          "note": "In-memory caching layer for performance optimization in hobby projects",
+          "icon": "redis",
+          "color": "#DC382D"
+        }
+      ]
+    },
+    {
+      "key": "explored",
+      "label": "Tocado / explorado",
+      "open": false,
+      "items": [
+        {
+          "name": "AWS",
+          "note": "Cloud infrastructure and deployment at work — no public repos"
+        },
+        {
+          "name": "Ansible",
+          "note": "Server provisioning and configuration management at work — no public repos",
+          "icon": "ansible",
+          "color": "#EE0000"
+        },
+        {
+          "name": "Terraform",
+          "note": "Infrastructure-as-Code experiments and personal project provisioning",
+          "icon": "terraform",
+          "color": "#7B42BC"
+        },
+        {
+          "name": "Go",
+          "note": "Scripting, CLI tooling, and backend utilities",
+          "icon": "go",
+          "color": "#00ADD8"
+        },
+        {
+          "name": "Rust",
+          "note": "Exploration of systems programming and performance-critical code",
+          "icon": "rust",
+          "color": "#000000"
+        },
+        {
+          "name": "Kubernetes",
+          "note": "Container orchestration learning and local cluster experiments",
+          "icon": "kubernetes",
+          "color": "#326CE5"
+        },
+        {
+          "name": "MongoDB",
+          "note": "NoSQL document database exploration for flexible data models",
+          "icon": "mongodb",
+          "color": "#47A248"
+        },
+        {
+          "name": "TensorFlow",
+          "note": "ML model experimentation and neural network exploration",
+          "icon": "tensorflow",
+          "color": "#FF6F00"
+        },
+        {
+          "name": "PyTorch",
+          "note": "Deep learning framework exploration for AI research concepts",
+          "icon": "pytorch",
+          "color": "#EE4C2C"
+        }
+      ]
+    }
+  ]
+}

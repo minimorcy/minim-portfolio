@@ -1,26 +1,27 @@
 {
   "categories": {
-    "order": ["languages", "frontend", "backend", "ia", "tools"],
+    "order": ["frontend", "backend", "data", "platform", "ai"],
     "labels": {
-      "languages": "Languages",
-      "frontend": "Frontend",
-      "backend": "Backend",
-      "ia": "AI / ML",
-      "tools": "Tools"
+      "frontend": "Frontend / UI",
+      "backend": "Backend / APIs",
+      "data": "Data / BBDD",
+      "platform": "Platform / DevOps",
+      "ai": "AI / ML"
     }
   },
   "items": [
-    { "name": "TypeScript", "icon": "typescript", "color": "#3178c6", "category": "languages" },
-    { "name": "React", "icon": "react", "color": "#61dafb", "category": "frontend" },
-    { "name": "Astro", "icon": "astro", "color": "#ff5d01", "category": "frontend" },
-    { "name": "Tailwind CSS", "icon": "tailwindcss", "color": "#06b6d4", "category": "frontend" },
-    { "name": "Node.js", "icon": "nodedotjs", "color": "#339933", "category": "backend" },
-    { "name": "Python", "icon": "python", "color": "#3776ab", "category": "backend" },
-    { "name": "TensorFlow", "icon": "tensorflow", "color": "#ff6f00", "category": "ia" },
-    { "name": "PyTorch", "icon": "pytorch", "color": "#ee4c2c", "category": "ia" },
-    { "name": "OpenAI API", "icon": "openai", "color": "#10a37f", "category": "ia" },
-    { "name": "Git", "icon": "git", "color": "#f05032", "category": "tools" },
-    { "name": "Docker", "icon": "docker", "color": "#2496ed", "category": "tools" },
-    { "name": "Figma", "icon": "figma", "color": "#f24e1e", "category": "tools" }
+    { "name": "JavaScript", "icon": "javascript", "color": "#3178c6", "category": "frontend", "level": "core" },
+    { "name": "React", "icon": "react", "color": "#61dafb", "category": "frontend", "level": "core" },
+    { "name": "Astro", "icon": "astro", "color": "#ff5d01", "category": "frontend", "level": "core" },
+    { "name": "Svelte", "icon": "svelte", "color": "#ff5d01", "category": "frontend", "level": "familiar" },
+    { "name": "Tailwind CSS", "icon": "tailwindcss", "color": "#06b6d4", "category": "frontend", "level": "core" },
+    { "name": "Node.js", "icon": "nodedotjs", "color": "#339933", "category": "backend", "level": "core" },
+    { "name": "Python", "icon": "python", "color": "#3776ab", "category": "backend", "level": "familiar" },
+    { "name": "TensorFlow", "icon": "tensorflow", "color": "#ff6f00", "category": "ai", "level": "touched" },
+    { "name": "PyTorch", "icon": "pytorch", "color": "#ee4c2c", "category": "ai", "level": "touched" },
+    { "name": "OpenAI API", "icon": "openai", "color": "#10a37f", "category": "ai", "level": "familiar" },
+    { "name": "Git", "icon": "git", "color": "#f05032", "category": "platform", "level": "core" },
+    { "name": "Docker", "icon": "docker", "color": "#2496ed", "category": "platform", "level": "core", "pro": true },
+    { "name": "Figma", "icon": "figma", "color": "#f24e1e", "category": "frontend", "level": "familiar" }
   ]
 }

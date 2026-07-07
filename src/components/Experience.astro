@@ -1,0 +1,145 @@
+---
+import siteConfig from '../config/site.json';
+import experienceConfig from '../config/experience.json';
+import type { ExperienceGroup } from '../types';
+
+const groups: ExperienceGroup[] = experienceConfig.groups as ExperienceGroup[];
+
+---
+
+<section id="experience">
+  <h2 class="section-title mono">{siteConfig.experienceTitle}</h2>
+  {groups.map(group => (
+    <details class="experience-group" open={group.open ?? group.key === 'daily'}>
+      <summary class="experience-summary mono">
+        <span>{group.label}</span>
+        <span class="experience-count">{group.items.length}</span>
+      </summary>
+      <div class="experience-items">
+        {group.items.map(item => (
+          <div class="experience-item glass-card">
+            {item.icon && (
+              <img
+                src={`https://cdn.simpleicons.org/${item.icon}/${(item.color || '00f0ff').replace('#', '')}`}
+                alt={item.name}
+                width="24"
+                height="24"
+                loading="lazy"
+              />
+            )}
+            <div class="experience-item-text">
+              <span class="experience-item-name">{item.name}</span>
+              <span class="experience-item-note">{item.note}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </details>
+  ))}
+</section>
+
+<style>
+  #experience {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    color: var(--accent-cyan);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .experience-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .experience-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--accent-cyan);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+    border-left: 3px solid var(--accent-cyan);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .experience-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .experience-summary::marker {
+    display: none;
+    content: "";
+  }
+
+  .experience-summary::after {
+    content: "+";
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+  }
+
+  details[open] .experience-summary::after {
+    content: "-";
+  }
+
+  .experience-count {
+    font-size: 0.75rem;
+    background: var(--accent-cyan);
+    color: var(--bg-primary);
+    padding: 2px 8px;
+    border-radius: 10px;
+    letter-spacing: normal;
+  }
+
+  .experience-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding-left: 1rem;
+  }
+
+  .experience-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .experience-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px var(--accent-cyan);
+    border-color: var(--accent-cyan);
+  }
+
+  .experience-item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .experience-item-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .experience-item-note {
+    font-size: 0.75rem;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+</style>

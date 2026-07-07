@@ -1,9 +1,9 @@
 ---
 import siteConfig from '../config/site.json';
 import techStackConfig from '../config/tech-stack.json';
-import type { TechStackItem } from '../types';
+import type { TechStackItem, TechStackConfig } from '../types';
 
-const { categories, items } = techStackConfig;
+const { categories, items } = techStackConfig as TechStackConfig;
 const { order, labels }: { order: string[]; labels: Record<string, string> } = categories;
 
 // Group items by category in defined order
@@ -23,7 +23,7 @@ const grouped = order
       <h3 class="category-label mono">{group.label}</h3>
       <div class="tech-grid">
         {group.items.map(item => (
-          <div class="tech-item glass-card" style={`--item-color: ${item.color || 'var(--accent-cyan)'}`}>
+          <div class={`tech-item glass-card tech-item--${item.level || 'core'}`} style={`--item-color: ${item.color || 'var(--accent-cyan)'}`}>
             <img
               src={`https://cdn.simpleicons.org/${item.icon}/${item.color?.replace('#', '') || '00f0ff'}`}
               alt={item.name}
@@ -32,6 +32,7 @@ const grouped = order
               loading="lazy"
             />
             <span class="tech-name">{item.name}</span>
+            {item.pro && <span class="pro-badge" aria-label={siteConfig.proBadgeAria}>PRO</span>}
           </div>
         ))}
       </div>
@@ -76,6 +77,7 @@ const grouped = order
   }
 
   .tech-item {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -95,5 +97,22 @@ const grouped = order
     font-size: 0.85rem;
     color: var(--text-primary);
     text-align: center;
+  }
+
+  .tech-item--familiar img { filter: saturate(0.5); }
+  .tech-item--familiar .tech-name { color: var(--text-secondary); }
+  .tech-item--touched img { filter: grayscale(1) saturate(0); opacity: 0.7; }
+  .tech-item--touched .tech-name { color: var(--text-muted); }
+  .pro-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: var(--accent-violet);
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
   }
 </style>

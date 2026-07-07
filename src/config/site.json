@@ -27,5 +27,7 @@
   "emptyRepos": "No public repositories found.",
   "footerTagline": "Full Stack · Front · IA",
   "footerCopyright": "Built with Astro · © 2026",
-  "skipToContentText": "Skip to content"
+  "skipToContentText": "Skip to content",
+  "experienceTitle": "Experiencia ampliada",
+  "proBadgeAria": "Experiencia profesional, sin repositorio público"
 }

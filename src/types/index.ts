@@ -43,6 +43,8 @@ export interface SiteConfig {
   footerTagline: string;
   footerCopyright: string;
   skipToContentText: string;
+  experienceTitle?: string;
+  proBadgeAria?: string;
 }
 
 export interface TechStackConfig {
@@ -58,6 +60,26 @@ export interface TechStackItem {
   icon: string;
   category: string;
   color: string;
+  level?: "core" | "familiar" | "touched";
+  pro?: boolean;
+}
+
+export interface ExperienceItem {
+  name: string;
+  note: string;
+  icon?: string;
+  color?: string;
+}
+
+export interface ExperienceGroup {
+  key: "daily" | "project" | "explored";
+  label: string;
+  open?: boolean;
+  items: ExperienceItem[];
+}
+
+export interface ExperienceConfig {
+  groups: ExperienceGroup[];
 }
 
 export interface RepoOverride {

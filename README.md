@@ -39,7 +39,7 @@ All site content is managed through JSON files in `src/config/`. Edit these file
 | `tech-stack.json` | Technologies displayed on the site (name, icon, color, category) |
 | `repos-config.json` | GitHub repo filtering, featured repos, display overrides |
 
-### site.json — All Text Content (29 fields)
+### site.json — All Text Content
 
 All visible strings in the portfolio are defined here, grouped by category.
 
@@ -107,6 +107,13 @@ All visible strings in the portfolio are defined here, grouped by category.
 |-------|------|-------------|
 | `skipToContentText` | `string` | Skip-to-content link text |
 
+#### Experience Section
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `experienceTitle` | `string` | Heading for the experience narrative section |
+| `proBadgeAria` | `string` | Accessibility label for the PRO badge |
+
 ### tech-stack.json — Technology Stack
 
 | Field | Type | Description |
@@ -123,6 +130,10 @@ Each item in `items` has:
 | `icon` | `string` | Simple Icons slug for the icon |
 | `color` | `string` | Hex color for the icon |
 | `category` | `string` | Key matching one of `categories.order` |
+| `level` | `string` | (Optional) Proficiency level: `core`, `familiar`, or `touched`. Affects visual rendering via CSS filter. |
+| `pro` | `boolean` | (Optional) If `true`, displays a "PRO" badge indicating professional/work experience without public repos. |
+
+**Levels**: `core` items render at full color, `familiar` items are desaturated, `touched` items are grayscale. Items without a `level` default to `core` behavior.
 
 #### Adding a New Category
 
@@ -137,6 +148,30 @@ To add a new category (e.g., "DevOps"):
    "labels": { ..., "devops": "DevOps" }
    ```
 3. Add items with `"category": "devops"` to the `items` array.
+
+### experience.json — Experience Narrative
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `groups` | `ExperienceGroup[]` | Array of 3 intensity groups: `daily`, `project`, `explored` |
+
+Each group has:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `key` | `string` | One of: `daily`, `project`, `explored` |
+| `items` | `ExperienceItem[]` | Technologies in this group |
+
+Each item in `items` has:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | `string` | Technology display name |
+| `note` | `string` | Brief context/usage description |
+| `icon` | `string` | (Optional) Simple Icons slug |
+| `color` | `string` | (Optional) Hex color for the icon |
+
+**Groups**: `daily` is expanded by default (everyday tools), `project` and `explored` are collapsed (click to expand). Items without an `icon` field render as text-only.
 
 ## Token Setup
 
