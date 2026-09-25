@@ -30,6 +30,7 @@ export interface SiteConfig {
   ctaPrimaryText: string;
   ctaPrimaryHref: string;
   ctaSecondaryText: string;
+  ctaLinkedinText: string;
   techStackTitle: string;
   /** Show the GitHub repos section */
   showGithubRepos: boolean;
@@ -106,6 +107,27 @@ export interface TransformedRepo {
   updatedAt: string;
   isFeatured: boolean;
   displayOrder: number;
+}
+
+export interface FeaturedProject {
+  name: string;
+  summary: string;
+  stack?: string[];
+  /** Path under /public, e.g. "/projects/my-app.png" */
+  image?: string;
+  demoUrl?: string;
+  repoUrl?: string;
+  /** Shows the "private code" badge */
+  private?: boolean;
+}
+
+export interface FeaturedProjectsConfig {
+  title: string;
+  subtitle?: string;
+  privateLabel: string;
+  demoLabel: string;
+  repoLabel: string;
+  projects: FeaturedProject[];
 }
 
 export interface LabsApp {

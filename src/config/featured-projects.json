@@ -1,0 +1,18 @@
+{
+  "title": "Proyectos destacados",
+  "subtitle": "Lo que mejor representa cómo trabajo, aunque el código no siempre sea público",
+  "privateLabel": "Código privado",
+  "demoLabel": "Probar ↗",
+  "repoLabel": "Código ↗",
+  "_ejemplo": {
+    "name": "Nombre del proyecto",
+    "summary": "Qué problema resuelve, qué hiciste tú y qué resultado tuvo. Una o dos frases.",
+    "stack": ["Astro", "Python", "Docker"],
+    "image": "/projects/nombre-del-proyecto.png",
+    "demoUrl": "https://mi-app.minim-labs.app",
+    "repoUrl": "https://github.com/minimorcy/mi-repo",
+    "private": true
+  },
+  "projects": [
+  ]
+}

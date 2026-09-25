@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import TechStack from '../components/TechStack.astro';
+import FeaturedProjects from '../components/FeaturedProjects.astro';
 import LabsApps from '../components/LabsApps.astro';
 import GitHubRepos from '../components/GitHubRepos.astro';
 import Footer from '../components/Footer.astro';
@@ -16,6 +17,7 @@ const description = siteConfig.bio;
   <main id="main">
     <Hero />
     <TechStack />
+    <FeaturedProjects />
     <LabsApps server:defer />
     {siteConfig.showGithubRepos && <GitHubRepos server:defer />}
     <Footer />

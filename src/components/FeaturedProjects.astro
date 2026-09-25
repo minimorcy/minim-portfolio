@@ -1,0 +1,199 @@
+---
+import featuredConfig from '../config/featured-projects.json';
+import type { FeaturedProjectsConfig } from '../types';
+
+const { title, subtitle, privateLabel, demoLabel, repoLabel, projects } =
+  featuredConfig as FeaturedProjectsConfig;
+---
+
+{projects.length > 0 && (
+  <section id="projects">
+    <header class="featured-header">
+      <h2 class="section-title mono">{title}</h2>
+      {subtitle && <p class="featured-subtitle">{subtitle}</p>}
+    </header>
+
+    <div class="featured-grid">
+      {projects.map(project => (
+        <article class="featured-card glass-card">
+          {project.image && (
+            <img class="featured-image" src={project.image} alt={project.name} loading="lazy" />
+          )}
+
+          <div class="featured-body">
+            <div class="featured-top">
+              <h3 class="featured-name">{project.name}</h3>
+              {project.private && (
+                <span class="featured-private mono">
+                  <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
+                  {privateLabel}
+                </span>
+              )}
+            </div>
+
+            <p class="featured-summary">{project.summary}</p>
+
+            {project.stack && project.stack.length > 0 && (
+              <ul class="featured-stack">
+                {project.stack.map(tech => <li class="featured-chip mono">{tech}</li>)}
+              </ul>
+            )}
+
+            {(project.demoUrl || project.repoUrl) && (
+              <div class="featured-links mono">
+                {project.demoUrl && (
+                  <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">{demoLabel}</a>
+                )}
+                {project.repoUrl && (
+                  <a href={project.repoUrl} target="_blank" rel="noopener noreferrer">{repoLabel}</a>
+                )}
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  #projects {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .featured-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    color: var(--accent-cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .featured-subtitle {
+    margin-top: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    align-items: start;
+    gap: 1.5rem;
+  }
+
+  .featured-card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .featured-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px var(--accent-dim);
+    border-color: var(--accent-cyan);
+  }
+
+  .featured-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-glow);
+  }
+
+  .featured-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+  }
+
+  .featured-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .featured-name {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+  }
+
+  .featured-private {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    color: var(--accent-violet);
+    border: 1px solid rgba(176, 38, 255, 0.4);
+  }
+
+  .featured-summary {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .featured-stack {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .featured-chip {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+  }
+
+  .featured-links {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    display: flex;
+    gap: 1.25rem;
+    font-size: 0.85rem;
+  }
+
+  .featured-links a {
+    color: var(--accent-cyan);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .featured-links a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    #projects {
+      padding: 3rem 1rem;
+    }
+
+    .featured-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .featured-card,
+    .featured-card:hover {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>
