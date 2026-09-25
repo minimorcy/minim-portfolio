@@ -14,5 +14,13 @@
     "private": true
   },
   "projects": [
+    {
+        "name": "CeArt · Lluvia de palabras",
+        "summary": "Juego multijugador en tiempo real: decid palabras a la vez hasta pensar lo mismo. Salas para 2-6 personas con enlace de invitación, reto diario compartible y un bot sin IA de pago (vectores de palabras que aprenden de las partidas reales), medido con su propio banco de pruebas.",
+        "stack": ["Node.js", "Socket.IO", "JavaScript", "Tailwind", "fastText", "Docker"],
+        "image": "/projects/ceart.jpg",
+        "demoUrl": "https://ceart.minim-labs.app",
+        "private": true
+    }
   ]
 }
