@@ -13,8 +13,8 @@ Fast personal portfolio built with Astro 5+ hybrid rendering, showcasing curated
 
 ```bash
 # Clone the repository
-git clone https://github.com/minimorcy/portfolio-minim.git
-cd portfolio-minim
+git clone https://github.com/minimorcy/minim-portfolio.git
+cd minim-portfolio
 
 # Install dependencies
 npm install

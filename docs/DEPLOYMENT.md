@@ -12,7 +12,7 @@ Deploy the portfolio to CapRover using either GitHub auto-deploy or a manual Doc
 
 1. Open the CapRover Dashboard
 2. Go to **Apps** → **Create New App**
-3. Name: `portfolio-minim`
+3. Name: `minim-portfolio`
 4. Click **Create App**
 
 ## Step 2: Deploy
@@ -24,7 +24,7 @@ Choose one of the two methods below.
 1. Go to the **Deploy** tab of your app
 2. Click **Method 4: GitHub Image** or **Connect to GitHub**
 3. Authorize CapRover to access your GitHub account
-4. Select the repository (`minimorcy/portfolio-minim`) and branch (`main`)
+4. Select the repository (`minimorcy/minim-portfolio`) and branch (`main`)
 5. Click **Enable Auto-Deploy**
 
 CapRover will now build and deploy automatically on every push to `main`.
