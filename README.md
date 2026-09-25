@@ -36,7 +36,7 @@ All site content is managed through JSON files in `src/config/`. Edit these file
 | File | Purpose |
 |------|---------|
 | `site.json` | All text content: profile, hero, sections, errors, footer, a11y |
-| `tech-stack.json` | Technologies displayed on the site (name, icon, color, category) |
+| `tech-stack.json` | Technologies displayed on the site, split by context (work / personal) |
 | `repos-config.json` | GitHub repo filtering, featured repos, display overrides |
 
 ### site.json — All Text Content
@@ -107,19 +107,15 @@ All visible strings in the portfolio are defined here, grouped by category.
 |-------|------|-------------|
 | `skipToContentText` | `string` | Skip-to-content link text |
 
-#### Experience Section
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `experienceTitle` | `string` | Heading for the experience narrative section |
-| `proBadgeAria` | `string` | Accessibility label for the PRO badge |
-
 ### tech-stack.json — Technology Stack
 
+The stack opens with a highlighted **core** block (technologies used both at work and at home), which branches into two columns: **work** and **personal projects**.
+
 | Field | Type | Description |
 |-------|------|-------------|
-| `categories.order` | `string[]` | Display order of category keys |
-| `categories.labels` | `Record<string, string>` | Human-readable labels for each category |
+| `contexts.work` | `{ label, subtitle? }` | Heading and subtitle of the work column |
+| `contexts.personal` | `{ label, subtitle? }` | Heading and subtitle of the personal column |
+| `contexts.shared` | `{ label, subtitle? }` | Heading of the highlighted "core" block shown first (technologies used in both) |
 | `items` | `TechStackItem[]` | Array of technology items |
 
 Each item in `items` has:
@@ -127,51 +123,19 @@ Each item in `items` has:
 | Field | Type | Description |
 |-------|------|-------------|
 | `name` | `string` | Technology display name |
-| `icon` | `string` | Simple Icons slug for the icon |
-| `color` | `string` | Hex color for the icon |
-| `category` | `string` | Key matching one of `categories.order` |
-| `level` | `string` | (Optional) Proficiency level: `core`, `familiar`, or `touched`. Affects visual rendering via CSS filter. |
-| `pro` | `boolean` | (Optional) If `true`, displays a "PRO" badge indicating professional/work experience without public repos. |
+| `context` | `("work" \| "personal")[]` | Where you use it. Both values → shown in the core block |
+| `icon` | `string` | (Optional) Simple Icons slug. Without it, a monogram with the first two letters is rendered |
+| `color` | `string` | (Optional) Hex brand color |
+| `note` | `string` | (Optional) Short usage note shown under the name |
+| `featured` | `boolean` | (Optional, default `true`) `false` renders the item as a small chip below the main grid |
 
-**Levels**: `core` items render at full color, `familiar` items are desaturated, `touched` items are grayscale. Items without a `level` default to `core` behavior.
+#### Adding a technology
 
-#### Adding a New Category
+```json
+{ "name": "Laravel", "icon": "laravel", "color": "#FF2D20", "context": ["work"] }
+```
 
-To add a new category (e.g., "DevOps"):
-
-1. Add to `categories.order`:
-   ```json
-   "order": ["languages", "frontend", "backend", "devops", "ia", "tools"]
-   ```
-2. Add to `categories.labels`:
-   ```json
-   "labels": { ..., "devops": "DevOps" }
-   ```
-3. Add items with `"category": "devops"` to the `items` array.
-
-### experience.json — Experience Narrative
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `groups` | `ExperienceGroup[]` | Array of 3 intensity groups: `daily`, `project`, `explored` |
-
-Each group has:
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `key` | `string` | One of: `daily`, `project`, `explored` |
-| `items` | `ExperienceItem[]` | Technologies in this group |
-
-Each item in `items` has:
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `name` | `string` | Technology display name |
-| `note` | `string` | Brief context/usage description |
-| `icon` | `string` | (Optional) Simple Icons slug |
-| `color` | `string` | (Optional) Hex color for the icon |
-
-**Groups**: `daily` is expanded by default (everyday tools), `project` and `explored` are collapsed (click to expand). Items without an `icon` field render as text-only.
+Use `"featured": false` for secondary technologies so the main grid stays short.
 
 ## Token Setup
 

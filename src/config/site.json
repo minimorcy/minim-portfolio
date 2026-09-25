@@ -17,6 +17,15 @@
   "ctaSecondaryText": "GitHub",
   "techStackTitle": "Stack",
   "reposTitle": "Proyectos",
+  "labsUrl": "https://minim-labs.app",
+  "labsTitle": "En vivo",
+  "labsSubtitle": "Apps desplegadas en mi VPS, funcionando ahora mismo",
+  "labsCtaText": "Ver todo en MînîM Labs ↗",
+  "labsVisitText": "Probar ↗",
+  "labsLiveText": "En vivo",
+  "labsSoonText": "Próximamente",
+  "labsShowSoon": false,
+  "labsExclude": ["javiermorcillonuevo.com"],
   "featuredBadge": "FEATURED",
   "demoLinkText": "Live Demo →",
   "errorAuth": "GitHub connection error — check PAT token. See ",
@@ -27,7 +36,5 @@
   "emptyRepos": "No public repositories found.",
   "footerTagline": "Full Stack · Front · IA",
   "footerCopyright": "Built with Astro · © 2026",
-  "skipToContentText": "Skip to content",
-  "experienceTitle": "Experiencia ampliada",
-  "proBadgeAria": "Experiencia profesional, sin repositorio público"
+  "skipToContentText": "Skip to content"
 }

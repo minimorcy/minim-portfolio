@@ -32,6 +32,17 @@ export interface SiteConfig {
   ctaSecondaryText: string;
   techStackTitle: string;
   reposTitle: string;
+  labsUrl: string;
+  labsTitle: string;
+  labsSubtitle?: string;
+  labsCtaText: string;
+  labsVisitText: string;
+  labsLiveText: string;
+  labsSoonText: string;
+  /** Show apps with status "soon" in the portfolio */
+  labsShowSoon: boolean;
+  /** Slugs from the MînîM Labs feed to hide in the portfolio */
+  labsExclude: string[];
   featuredBadge: string;
   demoLinkText: string;
   errorAuth: string;
@@ -43,43 +54,29 @@ export interface SiteConfig {
   footerTagline: string;
   footerCopyright: string;
   skipToContentText: string;
-  experienceTitle?: string;
-  proBadgeAria?: string;
 }
 
+export type TechContext = "work" | "personal";
+
 export interface TechStackConfig {
-  categories: {
-    order: string[];
-    labels: Record<string, string>;
+  contexts: {
+    work: { label: string; subtitle?: string };
+    personal: { label: string; subtitle?: string };
+    shared: { label: string; subtitle?: string };
   };
   items: TechStackItem[];
 }
 
 export interface TechStackItem {
   name: string;
-  icon: string;
-  category: string;
-  color: string;
-  level?: "core" | "familiar" | "touched";
-  pro?: boolean;
-}
-
-export interface ExperienceItem {
-  name: string;
-  note: string;
+  /** Simple Icons slug; without it a monogram is rendered */
   icon?: string;
   color?: string;
-}
-
-export interface ExperienceGroup {
-  key: "daily" | "project" | "explored";
-  label: string;
-  open?: boolean;
-  items: ExperienceItem[];
-}
-
-export interface ExperienceConfig {
-  groups: ExperienceGroup[];
+  context: TechContext[];
+  /** Short usage note shown under the name */
+  note?: string;
+  /** false renders the item as a small secondary chip. Default: true */
+  featured?: boolean;
 }
 
 export interface RepoOverride {
@@ -107,6 +104,17 @@ export interface TransformedRepo {
   updatedAt: string;
   isFeatured: boolean;
   displayOrder: number;
+}
+
+export interface LabsApp {
+  name: string;
+  slug: string;
+  url: string;
+  description: { es: string; en: string };
+  status: "live" | "soon";
+  stack: string[];
+  /** Result of the server-side health check (live apps only) */
+  isUp: boolean;
 }
 
 export interface GitHubAPIError {

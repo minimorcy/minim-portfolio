@@ -1,0 +1,241 @@
+---
+import siteConfig from '../config/site.json';
+import { getLabsApps } from '../lib/labs';
+
+const allApps = await getLabsApps(siteConfig.labsUrl);
+// Live apps that don't respond are hidden: the section promises they work right now
+const apps = allApps.filter(
+  app =>
+    !siteConfig.labsExclude.includes(app.slug) &&
+    (app.status === 'live' ? app.isUp : siteConfig.labsShowSoon)
+);
+---
+
+{apps.length > 0 && (
+  <section id="labs">
+    <header class="labs-header">
+      <h2 class="section-title mono">{siteConfig.labsTitle}</h2>
+      {siteConfig.labsSubtitle && <p class="labs-subtitle">{siteConfig.labsSubtitle}</p>}
+    </header>
+
+    <div class="labs-grid">
+      {apps.map(app => {
+        const isLive = app.status === 'live';
+        return (
+          <a
+            class:list={['labs-card', 'glass-card', { 'labs-card--soon': !isLive }]}
+            href={isLive ? app.url : undefined}
+            target={isLive ? '_blank' : undefined}
+            rel={isLive ? 'noopener noreferrer' : undefined}
+            aria-disabled={!isLive}
+          >
+            <div class="labs-card-top">
+              <h3 class="labs-name">{app.name}</h3>
+              {app.isUp && (
+                <span class="labs-status labs-status--live mono">
+                  <span class="labs-dot" aria-hidden="true"></span>
+                  {siteConfig.labsLiveText}
+                </span>
+              )}
+              {!isLive && <span class="labs-status mono">{siteConfig.labsSoonText}</span>}
+            </div>
+
+            <p class="labs-desc">{app.description.es}</p>
+
+            {app.stack.length > 0 && (
+              <ul class="labs-stack">
+                {app.stack.map(tech => <li class="labs-chip mono">{tech}</li>)}
+              </ul>
+            )}
+
+            <div class="labs-card-bottom mono">
+              <span class="labs-slug">{app.slug}</span>
+              {isLive && <span class="labs-visit">{siteConfig.labsVisitText}</span>}
+            </div>
+          </a>
+        );
+      })}
+    </div>
+
+    <a class="labs-cta mono" href={siteConfig.labsUrl} target="_blank" rel="noopener noreferrer">
+      {siteConfig.labsCtaText}
+    </a>
+  </section>
+)}
+
+<style>
+  #labs {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .labs-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    color: var(--accent-cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .labs-subtitle {
+    margin-top: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .labs-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .labs-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .labs-card[href]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px var(--accent-dim);
+    border-color: var(--accent-cyan);
+  }
+
+  .labs-card--soon {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  .labs-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .labs-name {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+  }
+
+  .labs-status {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+  }
+
+  .labs-status--live {
+    color: #34d399;
+    background: rgba(52, 211, 153, 0.1);
+  }
+
+  .labs-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: labs-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes labs-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6); }
+    50% { box-shadow: 0 0 0 5px rgba(52, 211, 153, 0); }
+  }
+
+  .labs-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .labs-stack {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .labs-chip {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+  }
+
+  .labs-card-bottom {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .labs-slug {
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .labs-visit {
+    color: var(--accent-cyan);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .labs-cta {
+    margin-top: 2rem;
+    padding: 0.6rem 1.25rem;
+    border: 1px solid var(--border-glow);
+    border-radius: 8px;
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .labs-cta:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 15px var(--accent-dim);
+  }
+
+  @media (max-width: 768px) {
+    #labs {
+      padding: 3rem 1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .labs-dot {
+      animation: none;
+    }
+
+    .labs-card,
+    .labs-card[href]:hover {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

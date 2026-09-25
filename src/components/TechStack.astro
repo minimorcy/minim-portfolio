@@ -1,43 +1,86 @@
 ---
 import siteConfig from '../config/site.json';
 import techStackConfig from '../config/tech-stack.json';
-import type { TechStackItem, TechStackConfig } from '../types';
+import type { TechStackItem, TechStackConfig, TechContext } from '../types';
 
-const { categories, items } = techStackConfig as TechStackConfig;
-const { order, labels }: { order: string[]; labels: Record<string, string> } = categories;
+const { contexts, items } = techStackConfig as TechStackConfig;
 
-// Group items by category in defined order
-const grouped = order
-  .map(cat => ({
-    category: cat,
-    label: labels[cat],
-    items: items.filter((item: TechStackItem) => item.category === cat)
-  }))
-  .filter(group => group.items.length > 0);
+const isShared = (item: TechStackItem) =>
+  item.context.includes('work') && item.context.includes('personal');
+
+const shared = items.filter(isShared);
+
+const columns = (['work', 'personal'] as TechContext[]).map(key => {
+  const own = items.filter(item => !isShared(item) && item.context.includes(key));
+  return {
+    key,
+    ...contexts[key],
+    featured: own.filter(item => item.featured !== false),
+    secondary: own.filter(item => item.featured === false),
+  };
+});
+
+const iconUrl = (item: TechStackItem) =>
+  `https://cdn.simpleicons.org/${item.icon}/${(item.color || '#00f0ff').replace('#', '')}`;
 ---
 
 <section id="tech-stack">
   <h2 class="section-title mono">{siteConfig.techStackTitle}</h2>
-  {grouped.map(group => (
-    <div class="category-group">
-      <h3 class="category-label mono">{group.label}</h3>
-      <div class="tech-grid">
-        {group.items.map(item => (
-          <div class={`tech-item glass-card tech-item--${item.level || 'core'}`} style={`--item-color: ${item.color || 'var(--accent-cyan)'}`}>
-            <img
-              src={`https://cdn.simpleicons.org/${item.icon}/${item.color?.replace('#', '') || '00f0ff'}`}
-              alt={item.name}
-              width="32"
-              height="32"
-              loading="lazy"
-            />
-            <span class="tech-name">{item.name}</span>
-            {item.pro && <span class="pro-badge" aria-label={siteConfig.proBadgeAria}>PRO</span>}
-          </div>
+
+  {shared.length > 0 && (
+    <div class="stack-core glass-card">
+      <header class="core-header">
+        <h3 class="core-label mono">{contexts.shared.label}</h3>
+        {contexts.shared.subtitle && <p class="core-subtitle">{contexts.shared.subtitle}</p>}
+      </header>
+      <ul class="core-list">
+        {shared.map(item => (
+          <li class="core-item" style={`--item-color: ${item.color || 'var(--accent-cyan)'}`}>
+            {item.icon ? (
+              <img src={iconUrl(item)} alt="" width="44" height="44" loading="lazy" />
+            ) : (
+              <span class="tech-monogram tech-monogram--lg mono" aria-hidden="true">{item.name.slice(0, 2)}</span>
+            )}
+            <span class="core-name">{item.name}</span>
+            {item.note && <span class="tech-note">{item.note}</span>}
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
-  ))}
+    <div class="stack-branch" aria-hidden="true"></div>
+  )}
+
+  <div class="stack-columns">
+    {columns.map(col => (
+      <div class={`stack-column glass-card stack-column--${col.key}`}>
+        <header class="column-header">
+          <h3 class="column-label mono">{col.label}</h3>
+          {col.subtitle && <p class="column-subtitle">{col.subtitle}</p>}
+        </header>
+
+        <ul class="tech-grid">
+          {col.featured.map(item => (
+            <li class="tech-item" style={`--item-color: ${item.color || 'var(--accent-cyan)'}`}>
+              {item.icon ? (
+                <img src={iconUrl(item)} alt="" width="32" height="32" loading="lazy" />
+              ) : (
+                <span class="tech-monogram mono" aria-hidden="true">{item.name.slice(0, 2)}</span>
+              )}
+              <span class="tech-name">{item.name}</span>
+              {item.note && <span class="tech-note">{item.note}</span>}
+            </li>
+          ))}
+        </ul>
+
+        {col.secondary.length > 0 && (
+          <ul class="tech-chips">
+            {col.secondary.map(item => <li class="tech-chip mono">{item.name}</li>)}
+          </ul>
+        )}
+      </div>
+    ))}
+  </div>
+
 </section>
 
 <style>
@@ -56,41 +99,76 @@ const grouped = order
     letter-spacing: 0.1em;
   }
 
-  .category-group {
-    margin-bottom: 2.5rem;
+  ul {
+    list-style: none;
   }
 
-  .category-label {
-    color: var(--accent-cyan);
+  .stack-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stack-column {
+    --column-accent: var(--accent-cyan);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    border-top: 3px solid var(--column-accent);
+  }
+
+  .stack-column--personal {
+    --column-accent: var(--accent-violet);
+  }
+
+  .column-label {
+    color: var(--column-accent);
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    margin-bottom: 1rem;
-    padding-left: 0.5rem;
-    border-left: 3px solid var(--accent-cyan);
+  }
+
+  .column-subtitle {
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
   }
 
   .tech-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 0.75rem;
   }
 
   .tech-item {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
     padding: 1rem 0.5rem;
-    transition: all 0.3s ease;
-    cursor: default;
+    border: 1px solid var(--border-glow);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
 
   .tech-item:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px var(--item-color, var(--accent-cyan));
-    border-color: var(--item-color, var(--accent-cyan));
+    box-shadow: 0 0 20px var(--item-color);
+    border-color: var(--item-color);
+  }
+
+  .tech-monogram {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 6px;
+    background: var(--item-color);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 700;
   }
 
   .tech-name {
@@ -99,20 +177,172 @@ const grouped = order
     text-align: center;
   }
 
-  .tech-item--familiar img { filter: saturate(0.5); }
-  .tech-item--familiar .tech-name { color: var(--text-secondary); }
-  .tech-item--touched img { filter: grayscale(1) saturate(0); opacity: 0.7; }
-  .tech-item--touched .tech-name { color: var(--text-muted); }
-  .pro-badge {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    background: var(--accent-violet);
-    color: white;
-    font-size: 0.6rem;
-    padding: 2px 6px;
-    border-radius: 4px;
+  .tech-note {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .tech-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech-chip {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--border-glow);
+    border-radius: 999px;
+  }
+
+  .stack-core {
+    position: relative;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
+      linear-gradient(90deg, var(--accent-cyan), var(--accent-violet)) border-box;
+    box-shadow:
+      -12px 0 40px -20px var(--accent-cyan),
+      12px 0 40px -20px var(--accent-violet);
+  }
+
+  .core-label {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .core-subtitle {
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .core-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .core-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 140px;
+    padding: 1.25rem 1rem;
+    border: 1px solid var(--border-glow);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .core-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 24px var(--item-color);
+    border-color: var(--item-color);
+  }
+
+  .core-name {
+    font-size: 1rem;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    color: var(--text-primary);
+  }
+
+  .tech-monogram--lg {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+
+  /* Fork connector: core → both columns */
+  .stack-branch {
+    position: relative;
+    height: 2.5rem;
+    margin: 0 25%;
+  }
+
+  .stack-branch::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 50%;
+    border-left: 2px solid var(--border-glow);
+  }
+
+  .stack-branch::after {
+    content: "";
+    position: absolute;
+    inset: 50% 0 0 0;
+    border: 2px solid transparent;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    border-image: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet)) 1;
+    border-image-slice: 1 1 0 1;
+  }
+
+  @media (max-width: 768px) {
+    #tech-stack {
+      padding: 3rem 1rem;
+    }
+
+    .stack-columns {
+      grid-template-columns: 1fr;
+    }
+
+    .stack-branch {
+      height: 1.5rem;
+    }
+
+    .stack-branch::after {
+      display: none;
+    }
+
+    .stack-branch::before {
+      height: 100%;
+    }
+
+    .core-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .stack-core {
+      padding: 1.5rem 1rem;
+    }
+
+    .core-item {
+      min-width: 0;
+      padding: 1rem 0.25rem;
+    }
+
+    .core-name {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tech-item,
+    .tech-item:hover,
+    .core-item,
+    .core-item:hover {
+      transition: none;
+      transform: none;
+    }
   }
 </style>

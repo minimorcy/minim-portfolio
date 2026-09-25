@@ -1,27 +1,31 @@
 {
-  "categories": {
-    "order": ["frontend", "backend", "data", "platform", "ai"],
-    "labels": {
-      "frontend": "Frontend / UI",
-      "backend": "Backend / APIs",
-      "data": "Data / BBDD",
-      "platform": "Platform / DevOps",
-      "ai": "AI / ML"
+  "contexts": {
+    "work": {
+      "label": "En el trabajo",
+      "subtitle": "Software de preservación digital"
+    },
+    "personal": {
+      "label": "En mis proyectos",
+      "subtitle": "Lo que aprendo y construyo por mi cuenta"
+    },
+    "shared": {
+      "label": "Mi base",
+      "subtitle": "Lo que uso a diario, en el trabajo y en mis proyectos"
     }
   },
   "items": [
-    { "name": "JavaScript", "icon": "javascript", "color": "#3178c6", "category": "frontend", "level": "core" },
-    { "name": "React", "icon": "react", "color": "#61dafb", "category": "frontend", "level": "core" },
-    { "name": "Astro", "icon": "astro", "color": "#ff5d01", "category": "frontend", "level": "core" },
-    { "name": "Svelte", "icon": "svelte", "color": "#ff5d01", "category": "frontend", "level": "familiar" },
-    { "name": "Tailwind CSS", "icon": "tailwindcss", "color": "#06b6d4", "category": "frontend", "level": "core" },
-    { "name": "Node.js", "icon": "nodedotjs", "color": "#339933", "category": "backend", "level": "core" },
-    { "name": "Python", "icon": "python", "color": "#3776ab", "category": "backend", "level": "familiar" },
-    { "name": "TensorFlow", "icon": "tensorflow", "color": "#ff6f00", "category": "ai", "level": "touched" },
-    { "name": "PyTorch", "icon": "pytorch", "color": "#ee4c2c", "category": "ai", "level": "touched" },
-    { "name": "OpenAI API", "icon": "openai", "color": "#10a37f", "category": "ai", "level": "familiar" },
-    { "name": "Git", "icon": "git", "color": "#f05032", "category": "platform", "level": "core" },
-    { "name": "Docker", "icon": "docker", "color": "#2496ed", "category": "platform", "level": "core", "pro": true },
-    { "name": "Figma", "icon": "figma", "color": "#f24e1e", "category": "frontend", "level": "familiar" }
+    { "name": "JavaScript", "icon": "javascript", "color": "#F7DF1E", "context": ["work", "personal"] },
+    { "name": "Docker", "icon": "docker", "color": "#2496ED", "context": ["work", "personal"] },
+    { "name": "Git", "icon": "git", "color": "#F05032", "context": ["work", "personal"] },
+
+    { "name": "PHP", "icon": "php", "color": "#777BB4", "context": ["work"] },
+    { "name": "MySQL", "icon": "mysql", "color": "#4479A1", "context": ["work"] },
+    { "name": "C#", "color": "#9B4F96", "context": ["work"] },
+    { "name": "Ansible", "icon": "ansible", "color": "#EE0000", "context": ["work"] },
+
+    { "name": "Astro", "icon": "astro", "color": "#BC52EE", "context": ["personal"] },
+    { "name": "React", "icon": "react", "color": "#61DAFB", "context": ["personal"] },
+    { "name": "Node.js", "icon": "nodedotjs", "color": "#5FA04E", "context": ["personal"] },
+    { "name": "Python", "icon": "python", "color": "#3776AB", "context": ["personal"] }
   ]
 }
