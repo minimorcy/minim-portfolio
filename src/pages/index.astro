@@ -17,7 +17,7 @@ const description = siteConfig.bio;
     <Hero />
     <TechStack />
     <LabsApps server:defer />
-    <GitHubRepos server:defer />
+    {siteConfig.showGithubRepos && <GitHubRepos server:defer />}
     <Footer />
   </main>
 </Layout>

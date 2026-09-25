@@ -1,5 +1,7 @@
 ---
 import siteConfig from '../config/site.json';
+
+const isExternalCta = siteConfig.ctaPrimaryHref.startsWith('http');
 ---
 
 <section class="hero">
@@ -11,7 +13,11 @@ import siteConfig from '../config/site.json';
     <p class="tagline mono">{siteConfig.tagline}</p>
     <p class="bio">{siteConfig.bio}</p>
     <div class="cta-group">
-      <a href={siteConfig.ctaPrimaryHref} class="cta-primary glass-card">{siteConfig.ctaPrimaryText}</a>
+      <a
+        href={siteConfig.ctaPrimaryHref}
+        class="cta-primary glass-card"
+        {...(isExternalCta && { target: '_blank', rel: 'noopener noreferrer' })}
+      >{siteConfig.ctaPrimaryText}</a>
       <a href={siteConfig.githubUrl} target="_blank" rel="noopener noreferrer" class="cta-secondary">{siteConfig.ctaSecondaryText}</a>
     </div>
   </div>

@@ -31,6 +31,8 @@ export interface SiteConfig {
   ctaPrimaryHref: string;
   ctaSecondaryText: string;
   techStackTitle: string;
+  /** Show the GitHub repos section */
+  showGithubRepos: boolean;
   reposTitle: string;
   labsUrl: string;
   labsTitle: string;
