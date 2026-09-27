@@ -60,7 +60,8 @@
       ],
       "image": "/projects/ceart.jpg",
       "demoUrl": "https://ceart.minim-labs.app",
-      "private": true
+      "private": true,
+      "building": true
     }
   ]
 }
