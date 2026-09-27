@@ -1,42 +1,111 @@
 {
   "nickname": "MînîM",
-  "tagline": "Full Stack Developer · Front Specialist · IA Passionate",
-  "bio": "Desarrollador full stack orientado al frontend, apasionado por la inteligencia artificial. Construyo experiencias web rapidas, accesibles y con alma.",
+  "tagline": {
+    "es": "Full Stack Developer · Front Specialist · IA Passionate",
+    "en": "Full Stack Developer · Front-end Specialist · AI Enthusiast"
+  },
+  "bio": {
+    "es": "Desarrollador full stack orientado al frontend, apasionado por la inteligencia artificial. Construyo experiencias web rápidas, accesibles y con alma.",
+    "en": "Front-end focused full stack developer with a passion for artificial intelligence. I build fast, accessible web experiences with soul."
+  },
   "githubUsername": "minimorcy",
   "githubUrl": "https://github.com/minimorcy",
   "linkedinUrl": "https://www.linkedin.com/in/javier-morcillo-nuevo/",
   "siteUrl": "https://javiermorcillonuevo.com",
-  "siteLanguage": "es",
   "homeTitle": "<MînîM /> · Portfolio",
   "titleSuffix": " · Portfolio",
   "ogImageUrl": "https://javiermorcillonuevo.com/og-image.png",
   "faviconPath": "/favicon.svg",
-  "heroAriaLabel": "MînîM, full stack developer",
-  "ctaPrimaryText": "Ver Proyectos",
+  "heroAriaLabel": {
+    "es": "MînîM, desarrollador full stack",
+    "en": "MînîM, full stack developer"
+  },
+  "ctaPrimaryText": {
+    "es": "Ver proyectos",
+    "en": "See projects"
+  },
   "ctaPrimaryHref": "https://minim-labs.app",
   "ctaSecondaryText": "GitHub",
   "ctaLinkedinText": "LinkedIn",
   "techStackTitle": "Stack",
   "showGithubRepos": false,
-  "reposTitle": "Proyectos",
+  "reposTitle": {
+    "es": "Proyectos",
+    "en": "Projects"
+  },
   "labsUrl": "https://minim-labs.app",
-  "labsTitle": "En vivo",
-  "labsSubtitle": "Apps desplegadas en mi VPS, funcionando ahora mismo",
-  "labsCtaText": "Ver todo en MînîM Labs ↗",
-  "labsVisitText": "Probar ↗",
-  "labsLiveText": "En vivo",
-  "labsSoonText": "Próximamente",
+  "labsTitle": {
+    "es": "En vivo",
+    "en": "Live"
+  },
+  "labsSubtitle": {
+    "es": "Apps desplegadas en mi VPS, funcionando ahora mismo",
+    "en": "Apps deployed on my VPS, running right now"
+  },
+  "labsCtaText": {
+    "es": "Ver todo en MînîM Labs ↗",
+    "en": "See everything on MînîM Labs ↗"
+  },
+  "labsVisitText": {
+    "es": "Probar ↗",
+    "en": "Try it ↗"
+  },
+  "labsLiveText": {
+    "es": "En vivo",
+    "en": "Live"
+  },
+  "labsBuildingText": {
+    "es": "En construcción",
+    "en": "Under construction"
+  },
+  "labsSoonText": {
+    "es": "Próximamente",
+    "en": "Coming soon"
+  },
   "labsShowSoon": false,
-  "labsExclude": ["javiermorcillonuevo.com"],
-  "featuredBadge": "FEATURED",
-  "demoLinkText": "Live Demo →",
-  "errorAuth": "GitHub connection error — check PAT token. See ",
-  "errorAuthLinkText": "guide",
+  "labsExclude": [
+    "javiermorcillonuevo.com"
+  ],
+  "featuredBadge": {
+    "es": "DESTACADO",
+    "en": "FEATURED"
+  },
+  "demoLinkText": {
+    "es": "Demo →",
+    "en": "Live demo →"
+  },
+  "errorAuth": {
+    "es": "Error de conexión con GitHub: revisa el token. Consulta la ",
+    "en": "GitHub connection error — check the token. See the "
+  },
+  "errorAuthLinkText": {
+    "es": "guía",
+    "en": "guide"
+  },
   "errorAuthLinkHref": "/docs/PAT-GUIDE.md",
-  "errorRateLimit": "Rate limited by GitHub — try again later.",
-  "errorGeneric": "GitHub API temporarily unavailable.",
-  "emptyRepos": "No public repositories found.",
+  "errorRateLimit": {
+    "es": "GitHub ha limitado las peticiones; inténtalo más tarde.",
+    "en": "Rate limited by GitHub — try again later."
+  },
+  "errorGeneric": {
+    "es": "La API de GitHub no está disponible temporalmente.",
+    "en": "GitHub API temporarily unavailable."
+  },
+  "emptyRepos": {
+    "es": "No hay repositorios públicos.",
+    "en": "No public repositories found."
+  },
   "footerTagline": "Full Stack · Front · IA",
-  "footerCopyright": "Built with Astro · © 2026",
-  "skipToContentText": "Skip to content"
+  "footerCopyright": {
+    "es": "Hecho con Astro · © 2026",
+    "en": "Built with Astro · © 2026"
+  },
+  "skipToContentText": {
+    "es": "Saltar al contenido",
+    "en": "Skip to content"
+  },
+  "languageSwitcherLabel": {
+    "es": "Idioma",
+    "en": "Language"
+  }
 }

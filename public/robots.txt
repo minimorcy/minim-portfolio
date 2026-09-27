@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tu-dominio.com/sitemap-index.xml
+Sitemap: https://javiermorcillonuevo.com/sitemap-index.xml

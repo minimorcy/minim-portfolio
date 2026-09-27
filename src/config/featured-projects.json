@@ -1,26 +1,66 @@
 {
-  "title": "Proyectos destacados",
-  "subtitle": "Lo que mejor representa cómo trabajo, aunque el código no siempre sea público",
-  "privateLabel": "Código privado",
-  "demoLabel": "Probar ↗",
-  "repoLabel": "Código ↗",
+  "title": {
+    "es": "Proyectos destacados",
+    "en": "Featured projects"
+  },
+  "subtitle": {
+    "es": "Lo que mejor representa cómo trabajo, aunque el código no siempre sea público",
+    "en": "What best represents how I work, even when the code isn't public"
+  },
+  "privateLabel": {
+    "es": "Código privado",
+    "en": "Private code"
+  },
+  "buildingLabel": {
+    "es": "En construcción",
+    "en": "Under construction"
+  },
+  "demoLabel": {
+    "es": "Probar ↗",
+    "en": "Try it ↗"
+  },
+  "repoLabel": {
+    "es": "Código ↗",
+    "en": "Code ↗"
+  },
   "_ejemplo": {
     "name": "Nombre del proyecto",
-    "summary": "Qué problema resuelve, qué hiciste tú y qué resultado tuvo. Una o dos frases.",
-    "stack": ["Astro", "Python", "Docker"],
+    "summary": {
+      "es": "Qué problema resuelve, qué hiciste tú y qué resultado tuvo. Una o dos frases.",
+      "en": "What problem it solves, what you did and what came out of it. One or two sentences."
+    },
+    "stack": [
+      "Astro",
+      "Python",
+      "Docker"
+    ],
     "image": "/projects/nombre-del-proyecto.png",
     "demoUrl": "https://mi-app.minim-labs.app",
     "repoUrl": "https://github.com/minimorcy/mi-repo",
-    "private": true
+    "private": true,
+    "building": true
   },
   "projects": [
     {
-        "name": "CeArt · Lluvia de palabras",
-        "summary": "Juego multijugador en tiempo real: decid palabras a la vez hasta pensar lo mismo. Salas para 2-6 personas con enlace de invitación, reto diario compartible y un bot sin IA de pago (vectores de palabras que aprenden de las partidas reales), medido con su propio banco de pruebas.",
-        "stack": ["Node.js", "Socket.IO", "JavaScript", "Tailwind", "fastText", "Docker"],
-        "image": "/projects/ceart.jpg",
-        "demoUrl": "https://ceart.minim-labs.app",
-        "private": true
+      "name": {
+        "es": "CeArt · Lluvia de palabras",
+        "en": "CeArt · Word Rain"
+      },
+      "summary": {
+        "es": "Juego multijugador en tiempo real: decid palabras a la vez hasta pensar lo mismo. Salas para 2-6 personas con enlace de invitación, reto diario compartible y un bot sin IA de pago (vectores de palabras que aprenden de las partidas reales), medido con su propio banco de pruebas.",
+        "en": "Real-time multiplayer game: say words at the same time until you think alike. Rooms for 2–6 players with invite links, a shareable daily challenge and a bot with no paid AI (word vectors that learn from real games), measured with its own test bench."
+      },
+      "stack": [
+        "Node.js",
+        "Socket.IO",
+        "JavaScript",
+        "Tailwind",
+        "fastText",
+        "Docker"
+      ],
+      "image": "/projects/ceart.jpg",
+      "demoUrl": "https://ceart.minim-labs.app",
+      "private": true
     }
   ]
 }

@@ -1,16 +1,16 @@
 {
   "contexts": {
     "work": {
-      "label": "En el trabajo",
-      "subtitle": "Software de preservación digital"
+      "label": { "es": "En el trabajo", "en": "At work" },
+      "subtitle": { "es": "Software de preservación digital", "en": "Digital preservation software" }
     },
     "personal": {
-      "label": "En mis proyectos",
-      "subtitle": "Lo que aprendo y construyo por mi cuenta"
+      "label": { "es": "En mis proyectos", "en": "In my projects" },
+      "subtitle": { "es": "Lo que aprendo y construyo por mi cuenta", "en": "What I learn and build on my own" }
     },
     "shared": {
-      "label": "Mi base",
-      "subtitle": "Lo que uso a diario, en el trabajo y en mis proyectos"
+      "label": { "es": "Mi base", "en": "My core" },
+      "subtitle": { "es": "Lo que uso a diario, en el trabajo y en mis proyectos", "en": "What I use every day, at work and in my projects" }
     }
   },
   "items": [

@@ -4,7 +4,7 @@
 
 **Portfolio personal · Full Stack Developer · Front Specialist · IA Passionate**
 
-Hecho con Astro, sin frameworks de UI y configurable al 100 % desde JSON.
+Hecho con Astro, sin frameworks de UI, en español e inglés y configurable al 100 % desde JSON.
 
 [![Astro](https://img.shields.io/badge/Astro-5-BC52EE?logo=astro&logoColor=white)](https://astro.build)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -54,18 +54,29 @@ flowchart LR
   A["minim-labs<br/>src/data/apps.ts"] -- build --> B["/projects.json"]
   B -- "fetch (server:defer)" --> C["Portfolio<br/>lib/labs.ts"]
   C -- "HEAD a cada app" --> D{"¿Responde?"}
-  D -- sí --> E["Tarjeta con ● En vivo"]
+  D -- sí --> E["Tarjeta con ● En vivo<br/>o ● En construcción"]
   D -- no --> F["Oculta"]
 ```
 
 - **Una sola fuente de verdad:** añado una app al hub y aparece en los dos sitios.
 - **Health check real:** cada app se comprueba con timeout de 3 s; si no responde, no se enseña.
+- **Tres estados**, compartidos con el hub: `live`, `building` (online pero en construcción) y `soon`.
 - **Nunca rompe la página:** el componente va con `server:defer`, cachea 5 minutos (también los fallos) y, si el hub no está disponible, la sección simplemente no aparece.
 - **Diagnosticable:** cualquier fallo deja una línea `[labs]` en los logs con el motivo.
 
 ### Proyectos destacados
 
-Casos de estudio escritos a mano en `featured-projects.json`, con captura, stack, enlaces y un distintivo de **código privado**. La sección no aparece mientras esté vacía.
+Casos de estudio escritos a mano en `featured-projects.json`, con captura, stack, enlaces y distintivos de **código privado** y **en construcción**. La sección no aparece mientras esté vacía.
+
+### Bilingüe
+
+Español en `/` e inglés en `/en/`, con selector de idioma y `hreflang`/`canonical` por versión. Cualquier texto de los JSON puede ser un string (igual en los dos idiomas) o `{ "es": "...", "en": "..." }`:
+
+```json
+"labsTitle": { "es": "En vivo", "en": "Live" }
+```
+
+Las descripciones de las apps de MînîM Labs ya vienen traducidas desde el hub.
 
 ### Contenido en JSON
 
@@ -93,11 +104,12 @@ Referencia completa de campos en [docs/CONFIGURATION.md](docs/CONFIGURATION.md).
 
 ```
 src/
-├── components/     Hero, TechStack, FeaturedProjects, LabsApps, GitHubRepos, Footer
+├── components/     HomePage + Hero, TechStack, FeaturedProjects, LabsApps, GitHubRepos, Footer
 ├── config/         Todo el contenido editable (JSON)
+├── i18n/           Idiomas y helper tr() para textos traducidos
 ├── lib/            github.ts y labs.ts: datos externos con caché y timeouts
 ├── layouts/        Layout base con SEO y Open Graph
-├── pages/          index.astro
+├── pages/          index.astro (es) y en/index.astro (en)
 ├── styles/         Tokens de diseño y utilidades globales
 └── types/          Tipos de la configuración y de los datos externos
 ```

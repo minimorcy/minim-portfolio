@@ -9,6 +9,21 @@ All site content is managed through JSON files in `src/config/`. Edit these file
 | `featured-projects.json` | Hand-written case studies (public or private) |
 | `repos-config.json` | GitHub repo filtering, featured repos, display overrides |
 
+## Languages (es / en)
+
+The site is served in Spanish at `/` and in English at `/en/` (Astro i18n routing, same as the MînîM Labs hub). A switcher in the top-right corner links both versions, and each page gets its own `lang`, `canonical`, `hreflang` alternates and `og:locale`.
+
+Any text field in the JSON files can be written in two ways:
+
+```json
+"techStackTitle": "Stack",
+"labsTitle": { "es": "En vivo", "en": "Live" }
+```
+
+A plain string is used for both languages; an object gives one value per language (a missing language falls back to Spanish). The helper is `tr()` in `src/i18n/utils.ts`.
+
+To add a language: add it to `languages` in `src/i18n/utils.ts` and to `i18n.locales` in `astro.config.mjs`, create `src/pages/<code>/index.astro` (copy `src/pages/en/index.astro`) and add the new key to the translated strings.
+
 ### site.json — All Text Content
 
 All visible strings in the portfolio are defined here, grouped by category.
@@ -29,7 +44,6 @@ All visible strings in the portfolio are defined here, grouped by category.
 | Field | Type | Description |
 |-------|------|-------------|
 | `siteUrl` | `string` | Canonical site URL |
-| `siteLanguage` | `string` | HTML `lang` attribute |
 | `homeTitle` | `string` | `<title>` for the home page |
 | `titleSuffix` | `string` | Suffix appended to page titles |
 | `ogImageUrl` | `string` | Open Graph image URL |
@@ -62,9 +76,11 @@ All visible strings in the portfolio are defined here, grouped by category.
 | `labsUrl` | `string` | Hub base URL. The feed is read from `<labsUrl>/projects.json` |
 | `labsTitle` / `labsSubtitle` | `string` | Section heading and subtitle |
 | `labsCtaText` / `labsVisitText` | `string` | "See all" button and per-card link labels |
-| `labsLiveText` / `labsSoonText` | `string` | Status badge labels |
+| `labsLiveText` / `labsBuildingText` / `labsSoonText` | `string` | Status badge labels (`live`, `building`, `soon`) |
 | `labsShowSoon` | `boolean` | Show apps with status `soon` |
 | `labsExclude` | `string[]` | Slugs from the feed to hide |
+
+Apps with status `live` or `building` are health-checked and only shown if they respond; `building` apps get an amber "under construction" badge.
 
 #### Error Messages
 
@@ -89,6 +105,7 @@ All visible strings in the portfolio are defined here, grouped by category.
 | Field | Type | Description |
 |-------|------|-------------|
 | `skipToContentText` | `string` | Skip-to-content link text |
+| `languageSwitcherLabel` | `string` | `aria-label` of the language switcher |
 
 ### tech-stack.json — Technology Stack
 
@@ -122,7 +139,7 @@ Use `"featured": false` for secondary technologies so the main grid stays short.
 
 ### featured-projects.json — Featured projects
 
-Hand-written case studies, so private projects can be shown too. The section is hidden while `projects` is empty. The file contains an `_ejemplo` entry with every field — copy it into `projects`.
+Hand-written case studies, so private projects can be shown too. `name` and `summary` accept `{ "es", "en" }` like any other text. The section is hidden while `projects` is empty. The file contains an `_ejemplo` entry with every field — copy it into `projects`.
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -132,3 +149,4 @@ Hand-written case studies, so private projects can be shown too. The section is 
 | `image` | `string` | (Optional) Path under `public/`, e.g. `/projects/my-app.png` (cropped to 16:9) |
 | `demoUrl` / `repoUrl` | `string` | (Optional) Links |
 | `private` | `boolean` | (Optional) Shows the "private code" badge |
+| `building` | `boolean` | (Optional) Online but still under construction: shows an amber badge |

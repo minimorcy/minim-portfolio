@@ -1,5 +1,13 @@
 ---
 import siteConfig from '../config/site.json';
+import { tr, type Lang, type Localized } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = (value: Localized) => tr(value, lang);
 
 const isExternalCta = siteConfig.ctaPrimaryHref.startsWith('http');
 ---
@@ -7,19 +15,19 @@ const isExternalCta = siteConfig.ctaPrimaryHref.startsWith('http');
 <section class="hero">
   <div class="hero-bg-glow"></div>
   <div class="hero-content">
-    <h1 class="nickname glitch-text" aria-label={siteConfig.heroAriaLabel}>
+    <h1 class="nickname glitch-text" aria-label={t(siteConfig.heroAriaLabel)}>
       <span class="tag">&lt;{siteConfig.nickname} /&gt;</span>
     </h1>
-    <p class="tagline mono">{siteConfig.tagline}</p>
-    <p class="bio">{siteConfig.bio}</p>
+    <p class="tagline mono">{t(siteConfig.tagline)}</p>
+    <p class="bio">{t(siteConfig.bio)}</p>
     <div class="cta-group">
       <a
         href={siteConfig.ctaPrimaryHref}
         class="cta-primary glass-card"
         {...(isExternalCta && { target: '_blank', rel: 'noopener noreferrer' })}
-      >{siteConfig.ctaPrimaryText}</a>
-      <a href={siteConfig.githubUrl} target="_blank" rel="noopener noreferrer" class="cta-secondary">{siteConfig.ctaSecondaryText}</a>
-      <a href={siteConfig.linkedinUrl} target="_blank" rel="noopener noreferrer" class="cta-secondary">{siteConfig.ctaLinkedinText}</a>
+      >{t(siteConfig.ctaPrimaryText)}</a>
+      <a href={siteConfig.githubUrl} target="_blank" rel="noopener noreferrer" class="cta-secondary">{t(siteConfig.ctaSecondaryText)}</a>
+      <a href={siteConfig.linkedinUrl} target="_blank" rel="noopener noreferrer" class="cta-secondary">{t(siteConfig.ctaLinkedinText)}</a>
     </div>
   </div>
 </section>

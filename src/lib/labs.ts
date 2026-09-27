@@ -17,7 +17,7 @@ function parseApp(value: unknown): RawApp | null {
     typeof app.url !== 'string' ||
     !app.url.startsWith('https://') ||
     typeof description?.es !== 'string' ||
-    (app.status !== 'live' && app.status !== 'soon')
+    (app.status !== 'live' && app.status !== 'building' && app.status !== 'soon')
   ) {
     return null;
   }
@@ -58,7 +58,7 @@ async function isReachable(url: string): Promise<boolean> {
 }
 
 /**
- * Loads the public app feed from MînîM Labs and checks which live apps respond.
+ * Loads the public app feed from MînîM Labs and checks which online apps respond.
  * Never throws: on any failure it returns an empty list so the section hides itself.
  */
 export async function getLabsApps(labsUrl: string): Promise<LabsApp[]> {
@@ -91,7 +91,7 @@ async function loadApps(labsUrl: string): Promise<LabsApp[]> {
     return await Promise.all(
       apps.map(async (app) => ({
         ...app,
-        isUp: app.status === 'live' ? await isReachable(app.url) : false,
+        isUp: app.status === 'soon' ? false : await isReachable(app.url),
       }))
     );
   } catch (error) {

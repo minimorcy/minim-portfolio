@@ -2,6 +2,14 @@
 import { getPortfolioRepos } from '../lib/github';
 import siteConfig from '../config/site.json';
 import reposConfig from '../config/repos-config.json';
+import { tr, type Lang, type Localized } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = (value: Localized) => tr(value, lang);
 
 const result = await getPortfolioRepos(siteConfig.githubUsername, reposConfig);
 const repos = result.repos;
@@ -9,24 +17,24 @@ const error = result.error;
 ---
 
 <section id="repos">
-  <h2 class="section-title mono">{siteConfig.reposTitle}</h2>
+  <h2 class="section-title mono">{t(siteConfig.reposTitle)}</h2>
   {
     error ? (
       <div class="error-state glass-card">
         {error.isAuthError ? (
           <p>
-            {siteConfig.errorAuth}{' '}
-            <a href={siteConfig.errorAuthLinkHref}>{siteConfig.errorAuthLinkText}</a>.
+            {t(siteConfig.errorAuth)}{' '}
+            <a href={siteConfig.errorAuthLinkHref}>{t(siteConfig.errorAuthLinkText)}</a>.
           </p>
         ) : error.isRateLimited ? (
-          <p>{siteConfig.errorRateLimit}</p>
+          <p>{t(siteConfig.errorRateLimit)}</p>
         ) : (
-          <p>{siteConfig.errorGeneric}</p>
+          <p>{t(siteConfig.errorGeneric)}</p>
         )}
       </div>
     ) : repos.length === 0 ? (
       <div class="empty-state glass-card">
-        <p>{siteConfig.emptyRepos}</p>
+        <p>{t(siteConfig.emptyRepos)}</p>
       </div>
     ) : (
       <div class="repos-grid">
@@ -35,7 +43,7 @@ const error = result.error;
             class="repo-card glass-card"
             data-featured={repo.isFeatured ? 'true' : 'false'}
           >
-            {repo.isFeatured && <span class="featured-badge mono">{siteConfig.featuredBadge}</span>}
+            {repo.isFeatured && <span class="featured-badge mono">{t(siteConfig.featuredBadge)}</span>}
             <h3 class="repo-name">
               <a
                 href={repo.url}
@@ -64,7 +72,7 @@ const error = result.error;
                 rel="noopener noreferrer"
                 class="demo-link"
               >
-                {siteConfig.demoLinkText}
+                {t(siteConfig.demoLinkText)}
               </a>
             )}
           </article>

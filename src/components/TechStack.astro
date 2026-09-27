@@ -2,6 +2,14 @@
 import siteConfig from '../config/site.json';
 import techStackConfig from '../config/tech-stack.json';
 import type { TechStackItem, TechStackConfig, TechContext } from '../types';
+import { tr, type Lang, type Localized } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = (value: Localized) => tr(value, lang);
 
 const { contexts, items } = techStackConfig as TechStackConfig;
 
@@ -25,13 +33,13 @@ const iconUrl = (item: TechStackItem) =>
 ---
 
 <section id="tech-stack">
-  <h2 class="section-title mono">{siteConfig.techStackTitle}</h2>
+  <h2 class="section-title mono">{t(siteConfig.techStackTitle)}</h2>
 
   {shared.length > 0 && (
     <div class="stack-core glass-card">
       <header class="core-header">
-        <h3 class="core-label mono">{contexts.shared.label}</h3>
-        {contexts.shared.subtitle && <p class="core-subtitle">{contexts.shared.subtitle}</p>}
+        <h3 class="core-label mono">{t(contexts.shared.label)}</h3>
+        {contexts.shared.subtitle && <p class="core-subtitle">{t(contexts.shared.subtitle)}</p>}
       </header>
       <ul class="core-list">
         {shared.map(item => (
@@ -42,7 +50,7 @@ const iconUrl = (item: TechStackItem) =>
               <span class="tech-monogram tech-monogram--lg mono" aria-hidden="true">{item.name.slice(0, 2)}</span>
             )}
             <span class="core-name">{item.name}</span>
-            {item.note && <span class="tech-note">{item.note}</span>}
+            {item.note && <span class="tech-note">{t(item.note)}</span>}
           </li>
         ))}
       </ul>
@@ -54,8 +62,8 @@ const iconUrl = (item: TechStackItem) =>
     {columns.map(col => (
       <div class={`stack-column glass-card stack-column--${col.key}`}>
         <header class="column-header">
-          <h3 class="column-label mono">{col.label}</h3>
-          {col.subtitle && <p class="column-subtitle">{col.subtitle}</p>}
+          <h3 class="column-label mono">{t(col.label)}</h3>
+          {col.subtitle && <p class="column-subtitle">{t(col.subtitle)}</p>}
         </header>
 
         <ul class="tech-grid">
@@ -67,7 +75,7 @@ const iconUrl = (item: TechStackItem) =>
                 <span class="tech-monogram mono" aria-hidden="true">{item.name.slice(0, 2)}</span>
               )}
               <span class="tech-name">{item.name}</span>
-              {item.note && <span class="tech-note">{item.note}</span>}
+              {item.note && <span class="tech-note">{t(item.note)}</span>}
             </li>
           ))}
         </ul>

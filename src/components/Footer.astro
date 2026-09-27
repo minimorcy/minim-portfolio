@@ -1,12 +1,20 @@
 ---
 import siteConfig from '../config/site.json';
+import { tr, type Lang, type Localized } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = (value: Localized) => tr(value, lang);
 ---
 
 <footer>
   <div class="footer-content">
     <div class="footer-brand">
       <span class="footer-nickname mono">&lt;{siteConfig.nickname} /&gt;</span>
-      <span class="footer-tag">{siteConfig.footerTagline}</span>
+      <span class="footer-tag">{t(siteConfig.footerTagline)}</span>
     </div>
     <div class="footer-links">
       <a href={siteConfig.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -18,7 +26,7 @@ import siteConfig from '../config/site.json';
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="mono">{siteConfig.footerCopyright}</span>
+    <span class="mono">{t(siteConfig.footerCopyright)}</span>
   </div>
 </footer>
 

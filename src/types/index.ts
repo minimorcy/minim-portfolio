@@ -1,3 +1,5 @@
+import type { Localized } from '../i18n/utils';
+
 export interface GitHubRepo {
   id: number;
   name: string;
@@ -15,57 +17,58 @@ export interface GitHubRepo {
 
 export interface SiteConfig {
   nickname: string;
-  tagline: string;
+  tagline: Localized;
   githubUsername: string;
   githubUrl: string;
   linkedinUrl: string;
-  bio: string;
+  bio: Localized;
   siteUrl: string;
-  siteLanguage: string;
-  homeTitle: string;
+  homeTitle: Localized;
   titleSuffix: string;
   ogImageUrl: string;
   faviconPath: string;
-  heroAriaLabel: string;
-  ctaPrimaryText: string;
+  heroAriaLabel: Localized;
+  ctaPrimaryText: Localized;
   ctaPrimaryHref: string;
-  ctaSecondaryText: string;
-  ctaLinkedinText: string;
-  techStackTitle: string;
+  ctaSecondaryText: Localized;
+  ctaLinkedinText: Localized;
+  techStackTitle: Localized;
   /** Show the GitHub repos section */
   showGithubRepos: boolean;
-  reposTitle: string;
+  reposTitle: Localized;
   labsUrl: string;
-  labsTitle: string;
-  labsSubtitle?: string;
-  labsCtaText: string;
-  labsVisitText: string;
-  labsLiveText: string;
-  labsSoonText: string;
+  labsTitle: Localized;
+  labsSubtitle?: Localized;
+  labsCtaText: Localized;
+  labsVisitText: Localized;
+  labsLiveText: Localized;
+  labsBuildingText: Localized;
+  labsSoonText: Localized;
   /** Show apps with status "soon" in the portfolio */
   labsShowSoon: boolean;
   /** Slugs from the MînîM Labs feed to hide in the portfolio */
   labsExclude: string[];
-  featuredBadge: string;
-  demoLinkText: string;
-  errorAuth: string;
-  errorAuthLinkText: string;
+  featuredBadge: Localized;
+  demoLinkText: Localized;
+  errorAuth: Localized;
+  errorAuthLinkText: Localized;
   errorAuthLinkHref: string;
-  errorRateLimit: string;
-  errorGeneric: string;
-  emptyRepos: string;
-  footerTagline: string;
-  footerCopyright: string;
-  skipToContentText: string;
+  errorRateLimit: Localized;
+  errorGeneric: Localized;
+  emptyRepos: Localized;
+  footerTagline: Localized;
+  footerCopyright: Localized;
+  skipToContentText: Localized;
+  languageSwitcherLabel: Localized;
 }
 
 export type TechContext = "work" | "personal";
 
 export interface TechStackConfig {
   contexts: {
-    work: { label: string; subtitle?: string };
-    personal: { label: string; subtitle?: string };
-    shared: { label: string; subtitle?: string };
+    work: { label: Localized; subtitle?: Localized };
+    personal: { label: Localized; subtitle?: Localized };
+    shared: { label: Localized; subtitle?: Localized };
   };
   items: TechStackItem[];
 }
@@ -77,7 +80,7 @@ export interface TechStackItem {
   color?: string;
   context: TechContext[];
   /** Short usage note shown under the name */
-  note?: string;
+  note?: Localized;
   /** false renders the item as a small secondary chip. Default: true */
   featured?: boolean;
 }
@@ -110,8 +113,8 @@ export interface TransformedRepo {
 }
 
 export interface FeaturedProject {
-  name: string;
-  summary: string;
+  name: Localized;
+  summary: Localized;
   stack?: string[];
   /** Path under /public, e.g. "/projects/my-app.png" */
   image?: string;
@@ -119,14 +122,17 @@ export interface FeaturedProject {
   repoUrl?: string;
   /** Shows the "private code" badge */
   private?: boolean;
+  /** Online but still being built: shows the "under construction" badge */
+  building?: boolean;
 }
 
 export interface FeaturedProjectsConfig {
-  title: string;
-  subtitle?: string;
-  privateLabel: string;
-  demoLabel: string;
-  repoLabel: string;
+  title: Localized;
+  subtitle?: Localized;
+  privateLabel: Localized;
+  buildingLabel: Localized;
+  demoLabel: Localized;
+  repoLabel: Localized;
   projects: FeaturedProject[];
 }
 
@@ -135,9 +141,10 @@ export interface LabsApp {
   slug: string;
   url: string;
   description: { es: string; en: string };
-  status: "live" | "soon";
+  /** "building": online but still under construction */
+  status: "live" | "building" | "soon";
   stack: string[];
-  /** Result of the server-side health check (live apps only) */
+  /** Result of the server-side health check (online apps only) */
   isUp: boolean;
 }
 

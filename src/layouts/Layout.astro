@@ -1,19 +1,25 @@
 ---
 import '../styles/global.css';
 import siteConfig from '../config/site.json';
+import { languages, defaultLang, getLocalizedPath, tr, type Lang } from '../i18n/utils';
 
 interface Props {
+  lang: Lang;
   pageTitle?: string;
   description?: string;
 }
 
-const { pageTitle, description } = Astro.props;
-const title = pageTitle || siteConfig.homeTitle;
-const desc = description || siteConfig.bio;
+const { lang, pageTitle, description } = Astro.props;
+const title = pageTitle || tr(siteConfig.homeTitle, lang);
+const desc = description || tr(siteConfig.bio, lang);
+
+const ogLocales: Record<Lang, string> = { es: 'es_ES', en: 'en_US' };
+const urlFor = (code: Lang) => new URL(getLocalizedPath(code), siteConfig.siteUrl).href;
+const canonicalUrl = urlFor(lang);
 ---
 
 <!doctype html>
-<html lang={siteConfig.siteLanguage}>
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,7 +31,8 @@ const desc = description || siteConfig.bio;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={desc} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={siteConfig.siteUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={ogLocales[lang]} />
     <meta property="og:image" content={siteConfig.ogImageUrl} />
 
     <!-- Twitter Card -->
@@ -34,8 +41,12 @@ const desc = description || siteConfig.bio;
     <meta name="twitter:description" content={desc} />
     <meta name="twitter:image" content={siteConfig.ogImageUrl} />
 
-    <!-- Canonical -->
-    <link rel="canonical" href={siteConfig.siteUrl} />
+    <!-- Canonical + language alternates -->
+    <link rel="canonical" href={canonicalUrl} />
+    {Object.keys(languages).map(code => (
+      <link rel="alternate" hreflang={code} href={urlFor(code as Lang)} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={urlFor(defaultLang)} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href={siteConfig.faviconPath} />
@@ -46,7 +57,7 @@ const desc = description || siteConfig.bio;
       "@type": "Person",
       "name": siteConfig.nickname,
       "url": siteConfig.siteUrl,
-      "jobTitle": siteConfig.tagline,
+      "jobTitle": tr(siteConfig.tagline, lang),
       "sameAs": [
         siteConfig.githubUrl,
         siteConfig.linkedinUrl
@@ -58,6 +69,18 @@ const desc = description || siteConfig.bio;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body class="dark">
+    <nav class="lang-switcher mono" aria-label={tr(siteConfig.languageSwitcherLabel, lang)}>
+      {Object.entries(languages).map(([code, label]) => (
+        <a
+          href={getLocalizedPath(code as Lang)}
+          hreflang={code}
+          aria-current={code === lang ? 'page' : undefined}
+          class:list={['lang-link', { 'lang-link--active': code === lang }]}
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
     <div class="container">
       <slot />
     </div>
@@ -65,6 +88,32 @@ const desc = description || siteConfig.bio;
 </html>
 
 <style is:global>
+  .lang-switcher {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 10;
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .lang-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.2rem 0.1rem;
+    transition: color 0.2s ease;
+  }
+
+  .lang-link:hover {
+    color: var(--accent-cyan);
+  }
+
+  .lang-link--active {
+    color: var(--accent-cyan);
+    border-bottom: 1px solid var(--accent-cyan);
+  }
+
   .container {
     max-width: 1200px;
     margin: 0 auto;

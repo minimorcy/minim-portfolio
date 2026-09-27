@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from './Hero.astro';
+import TechStack from './TechStack.astro';
+import FeaturedProjects from './FeaturedProjects.astro';
+import LabsApps from './LabsApps.astro';
+import GitHubRepos from './GitHubRepos.astro';
+import Footer from './Footer.astro';
+import siteConfig from '../config/site.json';
+import { tr, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<Layout lang={lang} pageTitle={tr(siteConfig.homeTitle, lang)} description={tr(siteConfig.bio, lang)}>
+  <a href="#main" class="skip-link">{tr(siteConfig.skipToContentText, lang)}</a>
+  <main id="main">
+    <Hero lang={lang} />
+    <TechStack lang={lang} />
+    <FeaturedProjects lang={lang} />
+    <LabsApps server:defer lang={lang} />
+    {siteConfig.showGithubRepos && <GitHubRepos server:defer lang={lang} />}
+    <Footer lang={lang} />
+  </main>
+</Layout>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-cyan);
+    color: var(--bg-primary);
+    padding: 0.5rem 1rem;
+    z-index: 100;
+    transition: top 0.2s ease;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+</style>
