@@ -62,6 +62,25 @@
       "demoUrl": "https://ceart.minim-labs.app",
       "private": true,
       "building": true
+    },
+    {
+      "name": "MetaPulse",
+      "summary": {
+        "es": "El meta de Pokémon Champions en tiempo real: uso, ataques, objetos y parejas más vistas en VGC, calculados a partir de las replays públicas de Showdown y actualizados cada pocos minutos. Incluye calculadora de daño y creador de equipos, en español e inglés.",
+        "en": "The Pokémon Champions meta in real time: the most used Pokémon, moves, items and pairings in VGC, computed from public Showdown replays and refreshed every few minutes. Includes a damage calculator and a team builder, in Spanish and English."
+      },
+      "stack": [
+        "Astro",
+        "Svelte",
+        "Tailwind",
+        "SQLite",
+        "Node.js",
+        "Docker"
+      ],
+      "image": "/projects/metapulse.jpg",
+      "demoUrl": "https://metapulse.minim-labs.app",
+      "private": true,
+      "building": true
     }
   ]
 }
