@@ -51,6 +51,11 @@ const canonicalUrl = urlFor(lang);
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href={siteConfig.faviconPath} />
 
+    <!-- PWA (Android TWA) -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <script is:inline>'serviceWorker' in navigator && navigator.serviceWorker.register('/sw.js');</script>
+
     <!-- JSON-LD Person Schema -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
