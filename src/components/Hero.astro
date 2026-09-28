@@ -119,8 +119,13 @@ const isExternalCta = siteConfig.ctaPrimaryHref.startsWith('http');
   }
 
   @media (max-width: 768px) {
+    .hero-content {
+      padding: 2rem 1rem;
+    }
+
     .nickname {
-      font-size: 3rem;
+      font-size: clamp(2.25rem, 12vw, 3rem);
+      white-space: nowrap;
     }
   }
 

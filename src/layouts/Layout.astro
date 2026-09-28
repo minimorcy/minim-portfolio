@@ -121,6 +121,13 @@ const canonicalUrl = urlFor(lang);
     padding: 2rem;
   }
 
+  /* On mobile each section sets its own side gutter */
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem 0;
+    }
+  }
+
   @media (min-width: 1024px) {
     .container {
       padding: 4rem;
