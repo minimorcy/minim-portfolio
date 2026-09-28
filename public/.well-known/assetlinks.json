@@ -1,8 +1,15 @@
-[{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "app.minimlabs",
-        "sha256_cert_fingerprints": ["8E:C0:B8:95:45:5C:B5:9E:B0:59:91:F6:DF:03:0A:EC:C9:C5:71:79:4C:95:74:1B:F5:3A:86:95:CE:23:24:04"]
-      }
-    }]
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.minimlabs",
+      "sha256_cert_fingerprints": [
+        "8E:C0:B8:95:45:5C:B5:9E:B0:59:91:F6:DF:03:0A:EC:C9:C5:71:79:4C:95:74:1B:F5:3A:86:95:CE:23:24:04",
+        "0F:B2:D4:5D:9E:3B:BD:8E:7B:3D:CC:D4:0A:2F:51:33:F3:D7:22:E8:63:48:47:3A:F5:15:0C:4E:01:49:B4:FD"
+      ]
+    }
+  }
+]
