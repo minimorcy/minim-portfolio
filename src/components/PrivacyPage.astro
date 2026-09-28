@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from './Footer.astro';
+import siteConfig from '../config/site.json';
+import { getLocalizedPath, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const email = siteConfig.contactEmail;
+
+const content = {
+  es: {
+    title: 'Política de privacidad',
+    updated: 'Última actualización: 28 de septiembre de 2026',
+    back: 'Volver al inicio',
+    sections: [
+      ['Resumen', 'Esta web y su app para Android no recogen, almacenan ni comparten datos personales. No hay registro de usuarios, formularios, cookies, publicidad ni herramientas de analítica.'],
+      ['Almacenamiento en el dispositivo', 'La app guarda en tu dispositivo una copia de las páginas visitadas para poder mostrarlas sin conexión. Esa copia no sale de tu dispositivo y se elimina al borrar los datos de la app.'],
+      ['Servidor', 'Como cualquier web, el servidor que la aloja puede registrar datos técnicos de las peticiones (como la dirección IP) por motivos de seguridad y funcionamiento. No se usan para identificarte ni se comparten con terceros.'],
+      ['Enlaces externos', 'La web enlaza a servicios de terceros como GitHub o LinkedIn. Al visitarlos se aplican sus propias políticas de privacidad.'],
+      ['Contacto', `Para cualquier duda sobre esta política, escribe a ${email}.`],
+    ],
+  },
+  en: {
+    title: 'Privacy policy',
+    updated: 'Last updated: September 28, 2026',
+    back: 'Back to home',
+    sections: [
+      ['Summary', 'This website and its Android app do not collect, store or share personal data. There is no user registration, forms, cookies, advertising or analytics.'],
+      ['On-device storage', 'The app keeps a copy of visited pages on your device so they can be shown offline. That copy never leaves your device and is removed when you clear the app data.'],
+      ['Server', 'Like any website, the hosting server may log technical request data (such as the IP address) for security and operational purposes. It is not used to identify you and is not shared with third parties.'],
+      ['External links', 'The website links to third-party services such as GitHub or LinkedIn. Their own privacy policies apply when you visit them.'],
+      ['Contact', `For any questions about this policy, write to ${email}.`],
+    ],
+  },
+}[lang];
+---
+
+<Layout lang={lang} pageTitle={content.title + siteConfig.titleSuffix} description={content.sections[0][1]}>
+  <main id="main" class="privacy">
+    <a href={getLocalizedPath(lang)} class="back mono">← {content.back}</a>
+    <h1>{content.title}</h1>
+    <p class="updated mono">{content.updated}</p>
+    {content.sections.map(([heading, text]) => (
+      <section>
+        <h2>{heading}</h2>
+        <p>{text}</p>
+      </section>
+    ))}
+  </main>
+  <Footer lang={lang} />
+</Layout>
+
+<style>
+  .privacy {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 0 4rem;
+    line-height: 1.7;
+  }
+
+  .back {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+  }
+
+  .back:hover {
+    color: var(--accent-cyan);
+  }
+
+  h1 {
+    margin-top: 1.5rem;
+    color: var(--accent-cyan);
+  }
+
+  .updated {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    margin: 1.75rem 0 0.5rem;
+  }
+
+  p {
+    color: var(--text-secondary);
+  }
+</style>

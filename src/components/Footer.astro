@@ -27,6 +27,7 @@ const t = (value: Localized) => tr(value, lang);
   </div>
   <div class="footer-bottom">
     <span class="mono">{t(siteConfig.footerCopyright)}</span>
+    <span class="mono"> · <a href={lang === 'es' ? '/privacidad' : '/en/privacy'}>{t(siteConfig.privacyLinkText)}</a></span>
   </div>
 </footer>
 
@@ -79,6 +80,14 @@ const t = (value: Localized) => tr(value, lang);
   .footer-bottom span {
     color: var(--text-muted);
     font-size: 0.75rem;
+  }
+
+  .footer-bottom a {
+    color: inherit;
+  }
+
+  .footer-bottom a:hover {
+    color: var(--accent-cyan);
   }
 
   @media (max-width: 768px) {
