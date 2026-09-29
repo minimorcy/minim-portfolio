@@ -25,7 +25,9 @@ const { title, subtitle, privateLabel, buildingLabel, demoLabel, repoLabel, proj
       {projects.map(project => (
         <article class="featured-card glass-card">
           {project.image && (
-            <img class="featured-image" src={project.image} alt={t(project.name)} loading="lazy" />
+            <a class="featured-media" href={project.image} target="_blank" rel="noopener">
+              <img class="featured-image" src={project.image} alt={t(project.name)} loading="lazy" />
+            </a>
           )}
 
           <div class="featured-body">
@@ -101,15 +103,13 @@ const { title, subtitle, privateLabel, buildingLabel, demoLabel, repoLabel, proj
 
   .featured-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    align-items: start;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   .featured-card {
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
 
@@ -119,11 +119,28 @@ const { title, subtitle, privateLabel, buildingLabel, demoLabel, repoLabel, proj
     border-color: var(--accent-cyan);
   }
 
+  .featured-card:nth-child(even) {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+
+  .featured-card:nth-child(even) .featured-media {
+    order: 2;
+    border-right: none;
+    border-left: 1px solid var(--border-glow);
+  }
+
+  .featured-media {
+    display: block;
+    align-self: center;
+    border-right: 1px solid var(--border-glow);
+    cursor: zoom-in;
+  }
+
   .featured-image {
+    display: block;
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-bottom: 1px solid var(--border-glow);
   }
 
   .featured-body {
@@ -136,9 +153,9 @@ const { title, subtitle, privateLabel, buildingLabel, demoLabel, repoLabel, proj
 
   .featured-top {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between;
-    gap: 0.75rem;
+    gap: 0.6rem;
   }
 
   .featured-name {
@@ -150,7 +167,6 @@ const { title, subtitle, privateLabel, buildingLabel, demoLabel, repoLabel, proj
     flex-shrink: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
     gap: 0.4rem;
   }
 
@@ -214,21 +230,24 @@ const { title, subtitle, privateLabel, buildingLabel, demoLabel, repoLabel, proj
     text-decoration: underline;
   }
 
-  @media (max-width: 768px) {
-    #projects {
-      padding: 3rem 1rem;
-    }
-
-    .featured-grid {
+  @media (max-width: 900px) {
+    .featured-card,
+    .featured-card:nth-child(even) {
       grid-template-columns: 1fr;
     }
 
-    .featured-top {
-      flex-direction: column;
+    .featured-media,
+    .featured-card:nth-child(even) .featured-media {
+      order: 0;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid var(--border-glow);
     }
+  }
 
-    .featured-badges {
-      justify-content: flex-start;
+  @media (max-width: 768px) {
+    #projects {
+      padding: 3rem 1rem;
     }
   }
 
