@@ -58,7 +58,7 @@
       "image": "/projects/metapulse.jpg",
       "demoUrl": "https://metapulse.minim-labs.app",
       "private": true,
-      "building": true
+      "building": false
     },
     {
       "name": {
