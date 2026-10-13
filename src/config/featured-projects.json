@@ -61,6 +61,25 @@
       "building": false
     },
     {
+      "name": "BattleLens",
+      "summary": {
+        "es": "Ficha instantánea del Pokémon rival en cualquier emulador de PC: tipos, debilidades, estadísticas, habilidades, ratio de captura y cómo le va contra tu Pokémon. No lee la memoria del emulador, sino el nombre en pantalla con el OCR de Windows, así que funciona con cualquier juego y generación.",
+        "en": "Instant info card for your opponent's Pokémon on any PC emulator: types, weaknesses, stats, abilities, catch rate and how it fares against your Pokémon. It doesn't read the emulator's memory but the name on screen with Windows' built-in OCR, so it works with any game and generation."
+      },
+      "stack": [
+        "Python",
+        "PyQt6",
+        "Windows OCR",
+        "NumPy",
+        "PyInstaller"
+      ],
+      "image": "/projects/battlelens.jpg",
+      "demoUrl": "https://battlelens.minim-labs.app",
+      "repoUrl": "https://github.com/minimorcy/battlelens",
+      "private": false,
+      "building": true
+    },
+    {
       "name": {
         "es": "CeArt · Lluvia de palabras",
         "en": "CeArt · Word Rain"
